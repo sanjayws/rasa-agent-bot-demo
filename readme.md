@@ -1,41 +1,20 @@
 
-# Chatwoot Agent Bot Demo using Rasa
+# Chatwoot Agent Bot Demo using Botpress
 
-This is a sample implementation of agent bot capabilities in chatwoot using [rasa](https://rasa.com/) . Rasa Open Source is a machine learning framework to automate text- and voice-based assistants.
+This is a sample implementation of agent bot capabilities in chatwoot using [rasa](https://botpress.com/) . Botpress is an Open Source is a machine learning framework to automate text assistants.
 
-You can refer the [rasa documentation](https://rasa.com/docs/rasa/user-guide/installation/) to get it up and running in your machine. 
+You can refer the [botpress documentation](https://botpress.com/docs) to get it up and running in your machine. 
 
 This implementation isn't a recommended set up for production, but just to illustrate the capabilities of the platform. Please build on top of this ideas discussed to have in running in production.
 
-
-
-Follow the given steps to get your agent bot integration up and running. 
-
-**Refer the [Video Walkthrough](https://youtube.com/watch?v=KE4nKgepO_k) and [blog post](https://www.chatwoot.com/blog/its-a-bot-story)**
-
-
-## Get a rasa project up and running. 
-
-Go to a new directory and create a rasa project. If you have rasa installed in your machine you can get it up and running by follow in commands.  Refer [docs](https://rasa.com/docs/rasa/user-guide/rasa-tutorial/) to get the installation up and running. 
+## Install Botpress (for dev environment only). 
 
 ```
-mkdir rasa
-cd rasa
-rasa init --no-prompt
-```
-
-go to `credentials.yml` file in the directory and ensure the following value is set. This is to ensure we can communicate with rasa through rest api
-
-```
-rest:
-  # you don't need to provide anything here - this channel doesn't
-  # require any credentials
-```
-
-start the rasa server with following command
-
-```
- rasa run -m models --enable-api --log-file out.log
+#download latest botpress
+mkdir botpress
+wget https://s3.amazonaws.com/botpress-binaries/botpress-v12_26_7-linux-x64.zip
+unzip botpress-v12_26_7-linux-x64.zip
+./bp --serve
 ```
 
 ##  Get your chatwoot up and create an agent bot
@@ -49,7 +28,7 @@ bundle exec rails c
 Inside the rails console, type the following commands to create an agent bot and get its access token. Save the retrieved token as you would need it in further step.
 
 ```
-bot = AgentBot.create!(name: "Rasa Bot", outgoing_url: "http://localhost:8000")
+bot = AgentBot.create!(name: "Botpress Bot", outgoing_url: "http://localhost:8000")
 bot.access_token.token
 ```
 
@@ -89,11 +68,5 @@ if you are on your local machine, you can access the widget through the test pag
 ```
 http://localhost:3000/widget_tests
 ```
-
-## Notes 
-
-You can also refer to the  [RasaHQ / rasa-demo](https://github.com/RasaHQ/rasa-demo) for adding additional capabilities to your bot. If training rasa through scripts isn’t your thing, check the exciting rasa projects which gives a UI to create your rasa stories. 
-- [Botfront](https://github.com/botfront/botfront)
-- [Articulate](https://github.com/samtecspg/articulate)
 
 You can build on top of the ideas discussed here to implement your solutions. Refer to the [chatwoot api](https://www.chatwoot.com/developers/api/) to see the available options in chatwoot for your bots.Pretty excited to see what you guys come up with. 
